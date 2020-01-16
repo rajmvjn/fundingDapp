@@ -6,7 +6,7 @@ import store from './store';
 
 //import { Header } from './components/layout/Header';
 import { Navbar } from './components/layout/Navbar';
-import { Login } from './components/admin/Login';
+import Login from './components/admin/Login';
 import { FundListing } from './components/public/FundListing';
 
 import './App.css';

@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { authenticate } from '../../actions/auth';
 
-export const Login = () => {
+const Login = ( {authenticate, isAuthenticated} ) => {
 
     const [authData, setAuthData] = useState({
        email: '',
-       password:'' 
+       password: '' 
     })
 
     const { email, password } = authData;
@@ -12,9 +16,12 @@ export const Login = () => {
     const updateAuthData = e => setAuthData({ ...authData, [e.target.name]: e.target.value})
 
     const onSubmit = e => {
-        e.preventDefault();
-        console.log(email);
-        console.log(password);
+        e.preventDefault();        
+        authenticate({ email, password });
+    }
+
+    if(isAuthenticated){
+        return <Redirect to="/CreateFundRequest" />
     }
 
     return (
@@ -32,7 +39,7 @@ export const Login = () => {
                     <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <div className="form-group">
-                    <label m>Password</label>
+                    <label>Password</label>
                     <input type="password" name="password" className="form-control" id="exampleInputPassword1" onChange = {e => updateAuthData(e)} />
                 </div>
                 
@@ -40,4 +47,15 @@ export const Login = () => {
             </form>
         </div>
     )
+};
+
+Login.propTypes = {
+    authenticate: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
 }
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect( mapStateToProps, { authenticate } )(Login);
