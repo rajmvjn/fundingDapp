@@ -8,6 +8,8 @@ import store from './store';
 import { Navbar } from './components/layout/Navbar';
 import Login from './components/admin/Login';
 import { FundListing } from './components/public/FundListing';
+import { CreateFundRequest } from './components/admin/CreateFundRequest';
+import  PrivateRoute  from './components/routing/PrivateRoute';
 
 import './App.css';
 
@@ -26,6 +28,7 @@ const App = () =>
             <Switch>
               <Route exact path='/login' component={Login} />
               <Route exact path='/fundlisting' component={FundListing} />
+              <PrivateRoute exact path='/createfundrequest' component={CreateFundRequest} />
             </Switch>
           </section>
         </Fragment>

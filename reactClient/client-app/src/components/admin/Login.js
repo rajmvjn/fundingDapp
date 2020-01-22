@@ -21,7 +21,7 @@ const Login = ( {authenticate, isAuthenticated} ) => {
     }
 
     if(isAuthenticated){
-        return <Redirect to="/CreateFundRequest" />
+        return <Redirect to="/createfundrequest" />
     }
 
     return (
